@@ -5,7 +5,7 @@ const { readFromFile, readAndAppend } = require('../../helpers/fsUtils');
 const uuid = require('../../helpers/uuid');
 
 notes.get('/', (req, res) => {
-    console.info(`${req.method} request received for notes`);
+    // console.info(`${req.method} request received for notes`);
   
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
   });
@@ -39,16 +39,17 @@ readAndAppend(newNote, './db/db.json');
 });
 
 // still working on delete method
-// notes.delete('/', (req, res) => {
-//     console.log(`${req.method} delete request received`);
-//     let notes = readFromFile;
-//     let id = req.params.id
-//     for (let i = 0; i < notes.length; i++){
-//         if (id == notes[i].id){
-//             notes.splice(i, 1)
-//         }
-//     }
-//   });
+notes.delete('/api/notes/:id', (req, res) => {
+    console.info(`${req.method} delete request received`);
+    let notes = readFromFile;
+    let id = req.body.params.id
+    for (let i = 0; i < notes.length; i++){
+        if (id === notes[i].id){
+            notes.splice(i, 1)
+        }
+    return notes;
+    }
+  });
 
 
 
